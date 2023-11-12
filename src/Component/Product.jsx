@@ -1,9 +1,23 @@
-import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useLoaderData, useParams } from 'react-router-dom';
 
 const Product = () => {
-    const product=useLoaderData({});
-    const {id,title,thumbnail,stock,rating,price}=product;
+    // const product=useLoaderData({});
+    // const {id,title,thumbnail,stock,rating,price}=product;
+
+    const [product,setProduct]=useState({});
+    const {id}=useParams()
+    useEffect(()=>{
+        fetch(`https://dummyjson.com/products/${id}`)
+        .then(res=>res.json())
+        .then(data=>setProduct(data))
+    },[id])
+     const {title,thumbnail,stock,rating,price}=product;
+
+
+
+
+
     return (
         <div>
             
@@ -42,6 +56,7 @@ const Product = () => {
         </div>
     </div>
 </div>
+
 
             
         </div>
